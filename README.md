@@ -107,3 +107,53 @@ $ docker exec -it mcordng40_vspgwc-synchronizer_1 bash
 
 ##### Validation
 First, go to the VTN UI, `http://<Head node IP>/vtn/onos/ui` and, go to Devices tab. Then, you can see one or more switches. Select one of switches and click `Flow` icon. If you can find priority `7001`, then flows are successfully set up for the selected switch. You should repeat above for all switches.
+
+## After run this software,
+First, go to SPGWU VNF and insert below.
+```
+Go to SPGWU VNF
+$ sudo su
+# cd /root/ngic/dp
+# source ../setenv.sh
+# make clean
+# make
+# ./udev.sh > results &
+```
+
+You should see below output then go further.
+```
+DP: RTE NOTICE enabled on lcore 1
+DP: RTE INFO enabled on lcore 1
+DP: RTE NOTICE enabled on lcore 0
+DP: RTE INFO enabled on lcore 0
+DP: RTE NOTICE enabled on lcore 3
+DP: RTE INFO enabled on lcore 3
+DP: RTE NOTICE enabled on lcore 5
+DP: RTE INFO enabled on lcore 5
+DP: RTE NOTICE enabled on lcore 4
+DP: RTE INFO enabled on lcore 4
+API: RTE NOTICE enabled on lcore 4
+API: RTE INFO enabled on lcore 4
+DP: RTE NOTICE enabled on lcore 6
+DP: RTE INFO enabled on lcore 6
+DP: RTE NOTICE enabled on lcore 2
+DP: RTE INFO enabled on lcore 2
+```
+
+Next, go to SPGWC VNF and insert below.
+```
+Go to SPGWC VNF
+$ sudo su
+# cd /root/ngic/cp
+# source ../setenv.sh
+# make clean
+# make
+# ./run.sh > results &
+```
+
+Finally, go to SPGWU VNF again and open `/root/ngic/dp/results`. If you can see below output at the bottom of this file, all VNFs are set up successfully.
+```
+DP: MTR_PROFILE ADD: index 2 cir:125000, cbd:3072, ebs:3072
+DP: MTR_PROFILE ADD: index 3 cir:250000, cbd:3072, ebs:3072
+DP: MTR_PROFILE ADD: index 4 cir:500000, cbd:3072, ebs:3072
+```
