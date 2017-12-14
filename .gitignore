@@ -1,1 +1,12 @@
 *.idea
+*.retry
+onos_rule_setup_info.sh
+flow_enb.json
+flow_enb_tnl.json
+flow_spgwu.json
+flow_spgwu_tnl.json
+enb_port
+enb_sw_id
+onos_ip
+spgwu_port
+spgwu_sw_id
