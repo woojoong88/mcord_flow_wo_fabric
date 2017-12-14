@@ -15,14 +15,14 @@
 ---
 - hosts: localhost
   vars:
-    - sgi_as_ip: "172.0.0.1"
-    - sgi_spgwu_ip: "172.0.0.2"
+    - sgi_as_ip: <eNB's IP address connected to sgi_network>
+    - sgi_spgwu_ip: <SGPWU's IP address connected to sgi_network>
     - ip_addr_pool: "16.0.0.0"
     - ip_pool_mask: "255.0.0.0"
     - ip_pool_mask_int: "8"
-    - enb_sw_ip: "10.6.1.3"
-    - spgwu_sw_ip: "10.6.1.2"
-    - enb_compute_name: "b"
-    - spgwu_compute_name: "a"
+    - enb_sw_ip: <IP address of br-int connected with eNB>
+    - spgwu_sw_ip: <IP address of br-int connected with SPGWU>
+    - enb_compute_name: <Compute node's name which runs eNB>
+    - spgwu_compute_name: <Compute node's name which runs SPGWU>
   roles:
       - rule_setup
