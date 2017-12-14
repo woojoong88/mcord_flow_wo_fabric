@@ -120,7 +120,7 @@ $ sudo su
 # ./udev.sh > results &
 ```
 
-You should see below output then go further.
+You should see below output in `results` and then go further.
 ```
 DP: RTE NOTICE enabled on lcore 1
 DP: RTE INFO enabled on lcore 1
