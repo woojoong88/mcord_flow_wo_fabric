@@ -61,7 +61,7 @@ $ nova list --all-tenants
 ```
 In this situation, `sgi_as_ip: 115.0.0.4` and `sgi_spgwu_ip: 115.0.0.5`.
 
-+ You can find `enb_compute_name` and `spgwu_compute_name` by using CORD UI. Go to `http://<Head node IP>/xos` and click `Instance` tab.
++ `enb_compute_name` and `spgwu_compute_name` are the compute node name for `eNB` and `SPGWU` VNFs, respectively. You can find them by using CORD UI. Go to `http://<Head node IP>/xos` and click `Instance` tab. Then, you can find `Node Id` column for each VNF.
 
 + You can find `enb_sw_ip` with `ip a list br-int` command. First, go to the compute node which contains eNB. Then, insert below.
 ```
