@@ -1,15 +1,15 @@
-# # M-CORD utility: Setting flow rules in the case w/o ONOS-Fabric.
+# M-CORD utility #1: Setting flow rules on toward VTN.
 
-This tools is to set up flow rules between SPGWU and eNB toward VTN, when there is no ONOS-Fabric. Of course, ONOS-Fabric has been set up well, this tools is unnecessary.
+This tools is to set up flow rules between SPGWU and eNB toward VTN, when there is no ONOS-Fabric. When ONOS-Fabric has been set up well, this tools is unnecessary since all rules will be set up automatically.
 
-## Before you use this,
+## 1. Before you use this,
 At first, go to SPGWC VNF and insert below.
 ```
 $ sudo pkill -9 -ef build
 ```
 Likewise, go to SPGWU and insert above.
 
-## How to use?
+## 2. How to use?
 
 ##### First, access head node.
 
@@ -106,4 +106,54 @@ $ docker exec -it mcordng40_vspgwc-synchronizer_1 bash
 ```
 
 ##### Validation
-First, go to the VTN UI, `http://<Head node IP>/vtn/onos/ui` and, go to Devices tab. Then, you can see one or more switches. Select one of switches and click `Flow` icon. If you can find priority `7001`, then flows are successfully set up for the selected switch. You should repeat above for all switches.
+First, go to the VTN UI, `http://<Head node IP>/vtn/onos/ui`, and go to Devices tab. Then, you can see one or more switches. Select one of switches and click `Flow` icon. If you can find priority `7001`, then flows are successfully set up for the selected switch. You should repeat above for all switches.
+
+## 3. After run this software,
+First, go to SPGWU VNF and insert below.
+```
+Go to SPGWU VNF
+$ sudo su
+# cd /root/ngic/dp
+# source ../setenv.sh
+# make clean
+# make
+# ./udev.sh > results &
+```
+
+You should see below output then go further.
+```
+DP: RTE NOTICE enabled on lcore 1
+DP: RTE INFO enabled on lcore 1
+DP: RTE NOTICE enabled on lcore 0
+DP: RTE INFO enabled on lcore 0
+DP: RTE NOTICE enabled on lcore 3
+DP: RTE INFO enabled on lcore 3
+DP: RTE NOTICE enabled on lcore 5
+DP: RTE INFO enabled on lcore 5
+DP: RTE NOTICE enabled on lcore 4
+DP: RTE INFO enabled on lcore 4
+API: RTE NOTICE enabled on lcore 4
+API: RTE INFO enabled on lcore 4
+DP: RTE NOTICE enabled on lcore 6
+DP: RTE INFO enabled on lcore 6
+DP: RTE NOTICE enabled on lcore 2
+DP: RTE INFO enabled on lcore 2
+```
+
+Next, go to SPGWC VNF and insert below.
+```
+Go to SPGWC VNF
+$ sudo su
+# cd /root/ngic/cp
+# source ../setenv.sh
+# make clean
+# make
+# ./run.sh > results &
+```
+
+Finally, go to SPGWU VNF again and open `/root/ngic/dp/results`. If you can see below output at the bottom of this file, all VNFs are set up successfully.
+```
+DP: MTR_PROFILE ADD: index 2 cir:125000, cbd:3072, ebs:3072
+DP: MTR_PROFILE ADD: index 3 cir:250000, cbd:3072, ebs:3072
+DP: MTR_PROFILE ADD: index 4 cir:500000, cbd:3072, ebs:3072
+```
