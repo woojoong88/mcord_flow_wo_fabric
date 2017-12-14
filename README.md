@@ -2,6 +2,13 @@
 
 This tools is to set up flow rules between SPGWU and eNB toward VTN, when there is no ONOS-Fabric. Of course, ONOS-Fabric has been set up well, this tools is unnecessary.
 
+## Before you use this,
+At first, go to SPGWC VNF and insert below.
+```
+$ sudo pkill -9 -ef build
+```
+Likewise, go to SPGWU and insert above.
+
 ## How to use?
 
 ##### First, access head node.
